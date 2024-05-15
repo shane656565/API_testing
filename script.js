@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const customerJson = `{
         "customerCompany": "Apollo",
-        "customerNumber": "6",
+        "customerNumber": "3",
         "customerName": "Alice"
     }`;
     const customer = JSON.parse(customerJson);

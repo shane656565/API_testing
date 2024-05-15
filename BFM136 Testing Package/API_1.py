@@ -15,20 +15,24 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
+modules = [
+    BFM136_1, BFM136_2, BFM136_3, BFM136_4, BFM136_5, BFM136_6,
+    BFM136_7, BFM136_8, BFM136_9, BFM136_10, BFM136_11, BFM136_12
+]
 
 
 def get_data_for_line(line_number, real_time_data):
     """ Helper function to extract specific line data based on line_number. """
     line_data = {}
 
-    # Correct the logic to check line_number correctly
-    if line_number in ['1', '4', '7', '10', '13', '16']:
+    # Determine the set of keys based on the line_number
+    if line_number in ['1', '4', '7', '10', '13', '16', '19', '22', '25', '28', '31', '34']:
         keys = ["V1Eu", "I1Eu", "kW1Eu", "kvar1Eu", "kVA1Eu",
                 "PF1Eu", "V1AngEu", "I1AngEu", "V1THDEu", "I1THDEu", "I1TDDEu"]
-    elif line_number in ['2', '5', '8', '11', '14', '17']:
+    elif line_number in ['2', '5', '8', '11', '14', '17', '20', '23', '26', '29', '32', '35']:
         keys = ["V2Eu", "I2Eu", "kW2Eu", "kvar2Eu", "kVA2Eu",
                 "PF2Eu", "V2AngEu", "I2AngEu", "V2THDEu", "I2THDEu", "I2TDDEu"]
-    elif line_number in ['3', '6', '9', '12', '15', '18']:
+    elif line_number in ['3', '6', '9', '12', '15', '18', '21', '24', '27', '30', '33', '36']:
         keys = ["V3Eu", "I3Eu", "kW3Eu", "kvar3Eu", "kVA3Eu",
                 "PF3Eu", "V3AngEu", "I3AngEu", "V3THDEu", "I3THDEu", "I3TDDEu"]
     else:
@@ -42,51 +46,25 @@ def get_data_for_line(line_number, real_time_data):
 
 @app.route("/api/Scarborough/<line>", methods=["GET"])
 def get_single_phase_data(line):
-    real_time1 = BFM136_1.RealTimeMeasurement()
-    real_time2 = BFM136_2.RealTimeMeasurement()
-    real_time3 = BFM136_3.RealTimeMeasurement()
-    real_time4 = BFM136_4.RealTimeMeasurement()
-    real_time5 = BFM136_5.RealTimeMeasurement()
-    real_time6 = BFM136_6.RealTimeMeasurement()
-    real_time7 = BFM136_7.RealTimeMeasurement()
-    real_time8 = BFM136_8.RealTimeMeasurement()
-    real_time9 = BFM136_9.RealTimeMeasurement()
-    real_time10 = BFM136_10.RealTimeMeasurement()
-    real_time11 = BFM136_11.RealTimeMeasurement()
-    real_time12 = BFM136_12.RealTimeMeasurement()
-    real_time_data1 = real_time1.DataArray()
-    real_time_data2 = real_time2.DataArray()
-    real_time_data3 = real_time3.DataArray()
-    real_time_data4 = real_time4.DataArray()
-    real_time_data5 = real_time5.DataArray()
-    real_time_data6 = real_time6.DataArray()
-    real_time_data7 = real_time7.DataArray()
-    real_time_data8 = real_time8.DataArray()
-    real_time_data9 = real_time9.DataArray()
-    real_time_data10 = real_time10.DataArray()
-    real_time_data11 = real_time11.DataArray()
-    real_time_data12 = real_time12.DataArray()
+    # Convert the line number to an integer for calculations
+    try:
+        line_number = int(line)
+    except ValueError:
+        return jsonify({"error": f"Invalid line number {line}."}), 404
 
-    if line == "1" or line == "2" or line == "3":
-        data = get_data_for_line(line, real_time_data1)
-    elif line == "4" or line == "5" or line == "6":
-        data = get_data_for_line(line, real_time_data2)
-    elif line == "7" or line == "8" or line == "9":
-        data = get_data_for_line(line, real_time_data3)
-    elif line == "10" or line == "11" or line == "12":
-        data = get_data_for_line(line, real_time_data4)
-    elif line == "13" or line == "14" or line == "15":
-        data = get_data_for_line(line, real_time_data5)
-    elif line == "16" or line == "17" or line == "18":
-        data = get_data_for_line(line, real_time_data6)
-# Make it easier
+    if 1 <= line_number <= 36:
+        module_index = (line_number - 1) // 3
+        module = modules[module_index]
+
+        real_time_data = module.RealTimeMeasurement().DataArray()
+        data = get_data_for_line(str(line_number), real_time_data)
     else:
-        return
+        return jsonify({"error": f"Line number {line} out of range."}), 404
 
     if data is not None:
         return jsonify(data)
     else:
-        return jsonify({"error": f"Invalid line number {line}."}), 404
+        return jsonify({"error": f"Data not found for line number {line}."}), 404
 
 
 if __name__ == '__main__':
