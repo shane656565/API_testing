@@ -29,10 +29,10 @@ def get_data_for_line(line_number, real_time_data):
     if line_number in ['1', '4', '7', '10', '13', '16', '19', '22', '25', '28', '31', '34']:
         keys = ["V1Eu", "I1Eu", "kW1Eu", "kvar1Eu", "kVA1Eu",
                 "PF1Eu", "V1AngEu", "I1AngEu", "V1THDEu", "I1THDEu", "I1TDDEu"]
-    elif line_number in ['2', '5', '8', '11', '14', '17', '20', '23', '26', '29', '32', '35']:
+    elif line_number in ['2', '5', '8', '11', '14', '17', '20', '23', '26', '29', '32']:
         keys = ["V2Eu", "I2Eu", "kW2Eu", "kvar2Eu", "kVA2Eu",
                 "PF2Eu", "V2AngEu", "I2AngEu", "V2THDEu", "I2THDEu", "I2TDDEu"]
-    elif line_number in ['3', '6', '9', '12', '15', '18', '21', '24', '27', '30', '33', '36']:
+    elif line_number in ['3', '6', '9', '12', '15', '18', '21', '24', '27', '30', '33']:
         keys = ["V3Eu", "I3Eu", "kW3Eu", "kvar3Eu", "kVA3Eu",
                 "PF3Eu", "V3AngEu", "I3AngEu", "V3THDEu", "I3THDEu", "I3TDDEu"]
     else:
