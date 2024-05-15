@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const customerJson = `{
         "customerCompany": "Apollo",
-        "customerNumber": "1",
+        "customerNumber": "6",
         "customerName": "Alice"
     }`;
     const customer = JSON.parse(customerJson);
@@ -53,7 +53,7 @@ function updateDisplay(data, unitNumber) {
     const currentDiv = document.getElementById('current');
     const powerDiv = document.getElementById('power');
 
-    voltageDiv.textContent = `Voltage: ${data[`V${unitNumber}Eu`] || "Error"} V`;
+    voltageDiv.textContent = `Voltage: ${data[`V${unitNumber}Eu`] || "Error"} V`; // Need to be changed
     currentDiv.textContent = `Current: ${data[`I${unitNumber}Eu`] || "Error"} A`;
     powerDiv.textContent = `Power: ${data[`kW${unitNumber}Eu`] || "Error"} kW`;
 
