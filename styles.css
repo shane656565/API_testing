@@ -1,0 +1,95 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: #2c3e50;
+}
+
+.buttons {
+    margin: 20px;
+}
+
+button {
+    background-color: #3498db;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+#displayArea {
+    display: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-top: 20px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+div {
+    margin: 10px 0;
+    width: 100%;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    #displayArea {
+        padding: 15px;
+        width: 95%;
+    }
+
+    body {
+        padding: 10px;
+    }
+}
+
+.auth-message {
+    color: red;
+    margin: 20px;
+    font-weight: bold;
+}
+
+.auth-message {
+    font-size: 1.2rem;
+    color: navy;
+}
+
+.data-display div {
+    margin-bottom: 10px;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+    display: none; /* Hidden by default */
+}
+
+#displayArea {
+    display: none; /* Initially hidden, shown on successful authentication */
+}
