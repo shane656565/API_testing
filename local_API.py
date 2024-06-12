@@ -5,7 +5,6 @@ import requests
 app = Flask(__name__)
 CORS(app)
 
-# Mapping of identifiers to device IP/line
 IPmap = {
     1: "192.168.8.1/1",
     2: "192.168.8.1/2",
